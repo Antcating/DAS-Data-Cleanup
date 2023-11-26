@@ -16,7 +16,7 @@ def deleting_old_files():
                     os.system(f"rm -rf {os.path.join(PATH, data_dir)}")
                     log.info(f"Deleting {data_dir}")
                 else:
-                    log.info(f"Skipping {data_dir}, .completed not found")
+                    log.warning(f"Skipping {data_dir}, .completed not found")
             else:
                 log.info(f"Skipping {data_dir}, too new")
 
