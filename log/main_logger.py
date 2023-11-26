@@ -46,8 +46,8 @@ if TELEGRAM_LOG == "True":
     if config_dict["TELEGRAM"]["channel"]:
         telegram_handler = TelegramBotHandler(config_dict["TELEGRAM"]["channel"])
         telegram_handler.setFormatter(formatter)
-        # Set log level to ERROR to avoid spamming the channel
-        telegram_handler.setLevel(logging.ERROR)
+        # Set log level to WARNING to avoid spamming the channel
+        telegram_handler.setLevel(logging.WARNING)
         logger.addHandler(telegram_handler)
     else:
         raise Exception("Telegram channel is not provided.")
