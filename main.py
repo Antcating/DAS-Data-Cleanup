@@ -1,29 +1,29 @@
-import os 
+import os
 import datetime
 
-from config import PATH
+from config import PATH, NASPATH
 from log.main_logger import logger as log
 
 
 def deleting_old_files():
-    today_date = datetime.datetime.now()
-    delete_before = today_date - datetime.timedelta(days=3)
+    if os.path.exists(os.path.join(NASPATH, "last")):
+        with open(os.path.join(NASPATH, "last"), "r", encoding='utf-8') as f:
+            last_timestamp = float(f.readlines()[0].strip())
+    last_timestamp -= 86400 * 3
 
-    for data_dir in os.listdir(PATH):
+    for data_dir in sorted(os.listdir(PATH)):
         if os.path.isdir(os.path.join(PATH, data_dir)):
-            log.info(f"Checking {data_dir}")
-            if datetime.datetime.fromtimestamp(
-                os.path.getmtime(
-                    os.path.join(PATH, data_dir))
-                    ) < delete_before:
-                if ".completed" in os.listdir(os.path.join(PATH, data_dir)):
+            print(os.path.getmtime(os.path.join(PATH, data_dir)), last_timestamp)
+            if last_timestamp > datetime.datetime.strptime(data_dir, "%Y%m%d").timestamp():
+                log.info(f"Deleting {data_dir}")
+                if os.name == "nt":
+                    # Delete dir in Windows
+                    os.system(f"rmdir /s /q {os.path.join(PATH, data_dir)}")
+                elif os.name == "posix":
+                    # Delete dir in Linux
                     os.system(f"rm -rf {os.path.join(PATH, data_dir)}")
-                    log.info(f"Deleting {data_dir}")
-                else:
-                    log.warning(f"Skipping {data_dir}, .completed not found")
             else:
-                log.info(f"Skipping {data_dir}, too new")
-
+                log.info("Skipping %s, too new", data_dir)
 
 if "__main__" == __name__:
     deleting_old_files()
