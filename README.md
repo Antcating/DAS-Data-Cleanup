@@ -1,9 +1,9 @@
-# DAS-Febus-Cleanup
+# DAS-Data-Cleanup
 
-This project is a Python script designed to clean up old files from a specified directory. It is an addition for the project DAS-Febus-Concat and specifically written to work with it.
+This project is a Python script designed to clean up old files from a specified directory. It is an addition for the project DAS-Data-Concat and specifically written to work with it.
 
 ## Table of Contents
-- [DAS-Febus-Cleanup](#das-febus-cleanup)
+- [DAS-Data-Cleanup](#das-Data-cleanup)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Getting Started](#getting-started)
@@ -27,12 +27,12 @@ To use this script, follow the steps below:
 
 1. Clone the repository to your local machine:
     ```shell
-    git clone https://github.com/Antcating/DAS-Febus-Cleanup.git
+    git clone https://github.com/Antcating/DAS-Data-Cleanup.git
     ```
 
 2. Navigate to the project directory:
     ```shell
-    cd DAS-Febus-Cleanup
+    cd DAS-Data-Cleanup
     ```
 
 3. Create and activate a virtual environment:
@@ -73,9 +73,9 @@ To use this script, follow the steps below:
 
 2. Alternatively, you can use the systemd service and timer provided in the `systemd` directory of this project. Follow these steps:
 
-   - Copy the `FebusCleanDaily.service` and `FebusCleanDaily.timer` files to the appropriate systemd directory (e.g., `/etc/systemd/system/`).
-   - Edit the `FebusCleanDaily.service` file and set the `ExecStart` path to the absolute path of the `clean.sh` script.
-   - Edit the `FebusCleanDaily.timer` file and set the desired interval for running the cleanup script.
+   - Copy the `DataCleanDaily.service` and `DataCleanDaily.timer` files to the appropriate systemd directory (e.g., `/etc/systemd/system/`).
+   - Edit the `DataCleanDaily.service` file and set the `ExecStart` path to the absolute path of the `clean.sh` script.
+   - Edit the `DataCleanDaily.timer` file and set the desired interval for running the cleanup script.
    - Enable and start the timer:
      ```shell
      sudo systemctl enable cleanup.timer
