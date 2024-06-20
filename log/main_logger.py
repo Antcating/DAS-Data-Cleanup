@@ -1,6 +1,6 @@
 import logging
 import os
-from config import PATH, config_dict
+from config import NASPATH_final, config_dict
 
 # Create formatter
 formatter = logging.Formatter(
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(LOG_LEVEL)
 
 # Create file handler
-file_handler = logging.FileHandler(os.path.join(PATH, "delete_log"))
+file_handler = logging.FileHandler(os.path.join(NASPATH_final, "delete_log"))
 file_handler.setLevel(LOG_LEVEL)
 
 # Set formats and add the handlers to the logger
